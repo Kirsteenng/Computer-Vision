@@ -94,10 +94,11 @@ int same_image(image a, image b, float eps)
 void test_get_pixel(){
     image im = load_image("data/dots.png");
     // Test within image
+    
     TEST(within_eps(0, get_pixel(im, 0,0,0), EPS));
     TEST(within_eps(1, get_pixel(im, 1,0,1), EPS));
     TEST(within_eps(0, get_pixel(im, 2,0,1), EPS));
-
+    
     // Test padding
     TEST(within_eps(1, get_pixel(im, 0,3,1), EPS));
     TEST(within_eps(1, get_pixel(im, 7,8,0), EPS));

@@ -2,9 +2,13 @@ from uwimg import *
 
 # 1. Getting and setting pixels
 im = load_image("data/dog.jpg")
+#print(im.w)
+#print(im.c)
+#print(im.h)
 for row in range(im.h):
     for col in range(im.w):
         set_pixel(im, col, row, 0, 0)
+        #print (result)
 save_image(im, "dog_no_red")
 
 # 3. Grayscale image
@@ -31,4 +35,10 @@ clamp_image(im)
 hsv_to_rgb(im)
 save_image(im, "dog_saturated")
 
-
+# Scale image
+im = load_image("data/dog.jpg")
+rgb_to_hsv(im)
+scale_image(im, 1, 2)
+clamp_image(im)
+hsv_to_rgb(im)
+save_image(im, "dog_scale_saturated")

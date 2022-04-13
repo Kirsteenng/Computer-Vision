@@ -97,6 +97,10 @@ load_image_lib = lib.load_image
 load_image_lib.argtypes = [c_char_p]
 load_image_lib.restype = IMAGE
 
+scale_image = lib.scale_image
+scale_image.argtypes = [IMAGE, c_int, c_float]
+scale_image.restype = None
+
 def load_image(f):
     return load_image_lib(f.encode('ascii'))
 
