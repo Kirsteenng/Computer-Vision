@@ -1,5 +1,5 @@
 from uwimg import *
-
+'''
 im = load_image("data/dogsmall.jpg")
 a = nn_resize(im, im.w*4, im.h*4)
 save_image(a, "dog4x-nn")
@@ -23,6 +23,7 @@ blur = convolve_image(im, f, 1)
 thumb = nn_resize(blur, blur.w//7, blur.h//7)
 save_image(thumb, "dogthumb")
 
+
 im = load_image("data/dog.jpg")
 f = make_gaussian_filter(2)
 blur = convolve_image(im, f, 1)
@@ -42,3 +43,10 @@ res = sobel_image(im)
 mag = res[0]
 feature_normalize(mag)
 save_image(mag, "magnitude")
+'''
+im = load_image("data/dog.jpg")
+res = colorize_sobel(im)
+print(type(res))
+#mag = res[0]
+#feature_normalize(mag)
+save_image(res, "col_magnitude")

@@ -332,8 +332,22 @@ void test_sharpen_filter(){
     free_image(blur);
     free_image(gt);
 }
-
+void print_image(image im){
+int width, height, channel;
+      
+      for (int channel=0;channel<im.c;channel++)
+        {
+          for(int height=0;height<im.h;height++)
+          {
+            for(int width=0;width<im.w;width++)
+            {
+                printf("pixel at coordinate: %d,%d,%d = %f", width, height, channel, get_pixel(im, width, height, channel));
+            }
+          }
+        }
+}
 void test_convolution(){
+    int width, height, channel;
     image im = load_image("data/dog.jpg");
     image f = make_box_filter(7);
     image blur = convolve_image(im, f, 1);
@@ -465,11 +479,11 @@ void test_hw2()
     test_bl_interpolate();
     test_bl_resize();
     test_multiple_resize();
+    test_convolution();
     test_gaussian_filter();
     test_sharpen_filter();
     test_emboss_filter();
     test_highpass_filter();
-    test_convolution();
     test_gaussian_blur();
     test_hybrid_image();
     test_frequency_image();
