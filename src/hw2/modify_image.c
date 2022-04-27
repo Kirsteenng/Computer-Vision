@@ -573,26 +573,30 @@ image colorize_sobel(image im)
     Create a colorized version of the edges in image "im" using the 
     algorithm described in the README.
   ************************************************************************/
-  //call sobel_image
-  //saturation,value = magnitude
-  //hsv_to_rgb()
-  //gaussian(sigma = 4)
 
-  image *sobel = sobel_image(im);
+  image new_im = make_image(im.w,im.h,3);
+  image gaussian = make_gaussian_filter(4.0);
+  image res = convolve_image(im, gaussian,1);
+  // apply sobel filter on original image
+  image *sobel = sobel_image(res);
+  feature_normalize(sobel[0]);
+  feature_normalize(sobel[1]);
+
+  float magnitude, direction;
   // set channnel 1 and 2 to magnitude, 0 to direction
       for (int i = 0; i < im.w; i++){
         for(int j = 0; j< im.h; j++){
-            set_pixel(im, i,j,0, get_pixel(sobel[1],i,j,0));
-            set_pixel(im, i,j,1,get_pixel(sobel[0],i,j,0));
-            set_pixel(im, i,j,2,get_pixel(sobel[0],i,j,0));
+            magnitude = get_pixel(sobel[0],i,j,0);
+            direction = get_pixel(sobel[1],i,j,0);
+            set_pixel(new_im, i,j,0, direction);
+            set_pixel(new_im, i,j,1,magnitude);
+            set_pixel(new_im, i,j,2,magnitude);
       }
     }
-  hsv_to_rgb(im);
-  image gaussian = make_gaussian_filter(4.0);
-  image res = convolve_image(im, gaussian,0);
+  hsv_to_rgb(new_im);
   free_image(gaussian);
 
-  return res;
+  return new_im;
 }
 
 // EXTRA CREDIT: Median filter

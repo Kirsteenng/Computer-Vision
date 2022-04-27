@@ -46,7 +46,7 @@ save_image(mag, "magnitude")
 '''
 im = load_image("data/dog.jpg")
 res = colorize_sobel(im)
-print(type(res))
+#print(type(res))
 #mag = res[0]
 #feature_normalize(mag)
 save_image(res, "col_magnitude")
